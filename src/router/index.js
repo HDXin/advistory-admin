@@ -8,8 +8,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      component: () => import('@/components/layout/Layout'),
+      redirect: '/home',
+      children: [
+        {
+          path: '/home',
+          name: 'HelloWorld',
+          component: HelloWorld
+        }
+      ]
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <page class="hello">
+    <h1 slot="header">{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -80,7 +80,7 @@
         </a>
       </li>
     </ul>
-  </div>
+  </page>
 </template>
 
 <script>
