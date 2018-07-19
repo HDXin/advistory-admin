@@ -8,9 +8,18 @@ import './components/common'
 import 'element-ui/lib/theme-chalk/index.css'
 import "wangeditor/dist/css/wangEditor.less";
 import 'normalize.css'
+import './styles/index.less'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
+
+Vue.mixin({   
+  methods:{  
+     goBack(){
+         this.$router.go(-1)
+     }
+  }  
+}); 
 
 /* eslint-disable no-new */
 new Vue({

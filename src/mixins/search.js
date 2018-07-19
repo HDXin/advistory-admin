@@ -13,10 +13,10 @@ export function searchOrReset(tableParams, queryParams, type) {
             queryParams[key] = '';
         }
     }
-    _.extend(tableParams, { limit: tableParams.limit, page: 1 });
-    let _params = _.extend({}, queryParams, tableParams);
-    _.forEach(_params, (v, k) => {  //去除空的参数
-        if (!v) {
+    Object.assign(tableParams, { limit: tableParams.limit, page: 1 });
+    let _params = Object.assign({}, queryParams, tableParams);
+    Object.keys(_params).forEach((k) => {  //去除空的参数
+        if (!_params[k]) {
             delete _params[k];
         }
     });
@@ -40,7 +40,7 @@ export var mixin = {
     data() {
         return {
             tableParams: {
-                limit: 20,
+                limit: 10,
                 page: Number(this.$route.query.page) ? Number(this.$route.query.page) : 1
             },
             queryParams: {},
@@ -77,9 +77,9 @@ export var mixin = {
 
             this.tableParams.page = val
 
-            let _params = _.extend( {},this.queryParams,this.tableParams);
-            _.forEach(_params, (v, k) => {
-                if (!v) {
+            let _params = Object.assign( {},this.queryParams,this.tableParams);
+            Object.keys(_params).forEach((k) => {  //去除空的参数
+                if (!_params[k]) {
                     delete _params[k];
                 }
             });

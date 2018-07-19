@@ -9,16 +9,14 @@ export default {
         return [];
       }
     },
-    disabled:{
+    disabled: {
       type: Boolean,
       default: false
     },
     limit: Number,
     action: {
       type: String,
-      default: `${$config.apiUrlPrefix[
-        $config.env.NODE_ENV
-      ]}admin/oss/aliyun/upload/`
+      default: `${$config.apiUrlPrefix[$config.env.NODE_ENV]}/image/single`
       // required: true
     },
     accept: {
@@ -39,16 +37,15 @@ export default {
   },
   computed: {
     fileList: function() {
-      return this.value;
-      // .map(item => {
-      //   if (/(download)|(http:\/\/)/.test(item.url)) {
-      //     return item;
-      //   } else {
-      //     return Object.assign(item, {
-      //       url: `${$config.imageUrl[$config.env.NODE_ENV]}download${item.url}`
-      //     });
-      //   }
-      // });
+      return this.value.map(item => {
+        if (/(download)|(http:\/\/)/.test(item.url)) {
+          return item;
+        } else {
+          return Object.assign(item, {
+            url: `${$config.imageUrl[$config.env.NODE_ENV]}download${item.url}`
+          });
+        }
+      });
     }
   },
   render(h) {
@@ -64,7 +61,7 @@ export default {
         "list-type": this.listType,
         "file-list": this.fileList,
         accept: this.accept,
-        "before-upload" : this.beforeUpload
+        "before-upload": this.beforeUpload
       }
     };
     return h(
@@ -139,7 +136,7 @@ export default {
   .el-upload {
     display: none;
   }
-  .upload-mask{
+  .upload-mask {
     position: absolute;
     top: 0;
     left: 0;

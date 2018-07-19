@@ -17,7 +17,8 @@ export default {
     },
     value: null,
     itemConfigs: Object,
-    disabled: Boolean
+    disabled: Boolean,
+    placeholder: String
   },
   render(h) {
     return h(
@@ -42,6 +43,7 @@ export default {
             props: {
               value: this.propValue,
               disabled: this.disabled,
+              placeholder: this.placeholder,
               ...this.itemConfigs
             }
           },

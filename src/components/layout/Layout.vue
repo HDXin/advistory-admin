@@ -12,9 +12,9 @@
                  text-color="#fff"
                  active-text-color="#ffd04b"
                  router>
-          <el-menu-item index="/goods/list">
+          <el-menu-item index="/user">
             <i class="el-icon-location"></i>
-            <span slot="title">商品列表</span>
+            <span slot="title">平台用户</span>
           </el-menu-item>
         </el-menu>
       </el-aside>

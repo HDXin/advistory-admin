@@ -1,3 +1,9 @@
 import Api from './Api';
 
-export let GoodsCategoryApi = new Api('admin/category', 'categoryId', {}); //商品分类增删改查
+export let userApi = new Api('admin/user', 'userId', {
+    validUserName:{
+        url: 'valid/username',
+        method: 'get'
+    }
+}); //用户管理
+export let loginApi = (data) => Api.post('auth/admin/login', data) //用户管理

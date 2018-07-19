@@ -49,8 +49,8 @@ export default {
       return h("el-pagination", {
         props: {
           layout: "total,sizes,prev, pager, next, jumper",
-          "page-size": this.limit || 20,
-          "page-sizes": this.limit ? [5,10,20,50,100] : [20],
+          "page-size": this.limit || 10,
+          "page-sizes": this.limit ? [5,10,20,50,100] : [10],
           currentPage: this.currentPage,
           total: this.total,
           ...this.pagingConfig
