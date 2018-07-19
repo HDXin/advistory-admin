@@ -1,4 +1,4 @@
-import Api from './Api';
+import Api from './api';
 
 export let userApi = new Api('admin/user', 'userId', {
     validUserName:{
