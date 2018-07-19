@@ -40,6 +40,10 @@ export default new Router({
       path: '/login',
       meta: { title: '登录' },
       component: () => import('@/pages/Login')
+    },
+    {
+      path: '*',
+      redirect: '/login'
     }
   ]
 })
