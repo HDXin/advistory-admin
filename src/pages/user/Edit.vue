@@ -62,6 +62,7 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item>
+                    <el-button @click="goBack">返回</el-button>
                     <el-button type="primary"
                                @click="submit" :loading="loading"
                                v-if="!isEdit">确认</el-button>
@@ -168,7 +169,7 @@ export default {
     },
     formatData() {
       let params = Object.assign({}, this.model);
-      params.photo = params.photo[0].response || params.photo[0].url.match(/download(\S*)/)[1] || "";
+      params.photo = params.photo[0].response || params.photo[0].url.matchUrl();
       return params;
     }
   }

@@ -8,7 +8,9 @@
       </el-col>
       <el-col :span="4"
               class="text-right">
-          <link-button to="/user/create" size="small" type="primary">新增</link-button>
+        <link-button to="/user/create"
+                     size="small"
+                     type="primary">新增</link-button>
       </el-col>
     </el-row>
     <el-form inline>
@@ -63,12 +65,39 @@ export default {
           prop: "email"
         },
         {
+          label: "状态",
+          formatter: row => {
+            return row.userStatus === "ENABLE" ? "启用" : "禁用";
+          }
+        },
+        {
           label: "操作",
           render: (h, { row }) => {
             return (
               <div>
-                <link-button to={`/user/edit/${row.userId}`} size="small" type="text"
-                       tag="button">编辑</link-button>
+                <link-button
+                  to={`/user/edit/${row.userId}`}
+                  size="small"
+                  type="text"
+                >
+                  编辑
+                </link-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  class={{'text-danger': row.userStatus === "ENABLE"}}
+                  onClick={() => this.changeStatus(row)}
+                >
+                  {row.userStatus === "ENABLE" ? "禁用" : "启用"}
+                </el-button>
+                <el-button
+                  type="text"
+                  size="small"
+                  class='text-danger'
+                  onClick={() => this.removeUser(row.userId)}
+                >
+                  删除
+                </el-button>
               </div>
             );
           }
@@ -85,6 +114,45 @@ export default {
         this.tableData = items;
         this.total = total;
       } catch (error) {
+        this.$message({
+          message: error.message,
+          type: "error"
+        });
+      }
+    },
+    async changeStatus(row) {
+      const title = `是否${row.userStatus === "ENABLE" ? "禁用" : "启用"}?`;
+      try {
+        await this.$confirm(title, "提示", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+          type: "warning"
+        });
+        if (row.userStatus === "ENABLE") {
+          await userApi.disable({userId: row.userId});
+        } else {
+          await userApi.enable({userId: row.userId});
+        }
+        this.getList();
+      } catch (error) {
+        if (error === "cancel") return;
+        this.$message({
+          message: error.message,
+          type: "error"
+        });
+      }
+    },
+     async removeUser(id){
+      try {
+        await this.$confirm('是否确定删除？', "提示", {
+          confirmButtonText: "确认",
+          cancelButtonText: "取消",
+          type: "warning"
+        });
+        await userApi.delete({userId: id})
+        this.getList();
+      } catch (error) {
+        if (error === "cancel") return;
         this.$message({
           message: error.message,
           type: "error"
