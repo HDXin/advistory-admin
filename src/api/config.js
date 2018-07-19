@@ -4,10 +4,10 @@ module.exports = {
     env: env,
     apiUrlPrefix: {
         development: 'http://api.51alf.cn',
-        production: "/api/operation/",
+        production: "http://api.51alf.cn",
     },
     imageUrl: {
         development: 'http://api.51alf.cn/image/',
-        production: "/api/operation/",
+        production: "http://api.51alf.cn/image/",
     }
 };
