@@ -12,6 +12,10 @@ export let userApi = new Api('admin/user', 'userId', {
     disable:{
         url: '{userId}/disable',
         method: 'put'
+    },
+    updatePass:{
+        url: 'pass/update',
+        method: 'put'
     }
 }); //用户管理
 export let loginApi = (data) => Api.post('auth/admin/login', data) //用户管理

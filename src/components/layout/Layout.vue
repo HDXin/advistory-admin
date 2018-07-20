@@ -86,7 +86,7 @@ export default {
 .layout-content {
   background: #ffffff;
   min-height: 83vh;
-  padding: 0;
+  padding: 0 !important;
 }
 .el-submenu .el-menu-item {
   min-width: 199px;
