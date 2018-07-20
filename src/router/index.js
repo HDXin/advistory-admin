@@ -33,7 +33,31 @@ export default new Router({
             title: '运营平台用户新增'
           },
           component: () => import('@/pages/user/Edit')
-        }
+        },
+        {
+          path: '/carousel',
+          name: 'carousel',
+          meta:{
+            title: '轮播图'
+          },
+          component: () => import('@/pages/carousel/Carousel')
+        },
+        {
+          path: '/carousel/create',
+          name: 'carousel_create',
+          meta:{
+            title: '轮播图新增'
+          },
+          component: () => import('@/pages/carousel/Edit')
+        },
+        {
+          path: '/carousel/edit/:id',
+          name: 'carousel_edit',
+          meta:{
+            title: '轮播图编辑'
+          },
+          component: () => import('@/pages/carousel/Edit')
+        },
       ]
     },
     {

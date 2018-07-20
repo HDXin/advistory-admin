@@ -3,21 +3,19 @@
     <el-row slot="header">
       <el-col :span="20">
         <el-breadcrumb separator=">">
-          <el-breadcrumb-item>运营平台用户</el-breadcrumb-item>
+          <el-breadcrumb-item>轮播图</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
       <el-col :span="4"
               class="text-right">
-        <link-button to="/user/create"
+        <link-button to="/carousel/create"
                      size="small"
                      type="primary">新增</link-button>
       </el-col>
     </el-row>
     <el-form inline>
-      <k-form-item label="用户名"
-                   v-model="queryParams.userName"></k-form-item>
-      <k-form-item label="手机号"
-                   v-model="queryParams.mobile"></k-form-item>
+      <k-form-item label="标题"
+                   v-model="queryParams.title"></k-form-item>
       <el-form-item>
         <el-button type="primary"
                    @click="search">检索</el-button>
@@ -35,40 +33,36 @@
 </template>
 <script>
 import { mixin } from "@/mixins/search";
-import { userApi } from "@/api";
+import { swiperApi } from "@/api";
 export default {
   mixins: [mixin],
   data() {
     return {
       queryParams: {
-        userName: "",
-        mobile: ""
+        title: "",
       },
       tableData: [],
       columns: [
         {
-          label: "用户名",
-          prop: "userName"
+          label: "标题",
+          prop: "title"
         },
         {
-          label: "手机号码",
-          prop: "mobile"
+          label: "描述",
+          prop: "description"
         },
         {
-          label: "性别",
-          prop: "gender",
-          formatter: row => {
-            return row.gender ? "男" : "女";
-          }
+          label: "跳转链接",
+          prop: "link",
         },
         {
-          label: "邮箱",
-          prop: "email"
+          label: "轮播类型",
+          prop: "type"
         },
         {
           label: "状态",
           formatter: row => {
-            return row.userStatus === "ENABLE" ? "启用" : "禁用";
+            return row.enableStatus === "ENABLE" ? "启用" : "禁用";
           }
         },
         {
@@ -77,7 +71,7 @@ export default {
             return (
               <div>
                 <link-button
-                  to={`/user/edit/${row.userId}`}
+                  to={`/carousel/edit/${row.swiperId}`}
                   size="small"
                   type="text"
                 >
@@ -86,16 +80,16 @@ export default {
                 <el-button
                   type="text"
                   size="small"
-                  class={{'text-danger': row.userStatus === "ENABLE"}}
+                  class={{'text-danger': row.enableStatus === "ENABLE"}}
                   onClick={() => this.changeStatus(row)}
                 >
-                  {row.userStatus === "ENABLE" ? "禁用" : "启用"}
+                  {row.enableStatus === "ENABLE" ? "禁用" : "启用"}
                 </el-button>
                 <el-button
                   type="text"
                   size="small"
                   class='text-danger'
-                  onClick={() => this.removeUser(row.userId)}
+                  onClick={() => this.removeSwiper(row.swiperId)}
                 >
                   删除
                 </el-button>
@@ -111,7 +105,7 @@ export default {
       params = Object.assign({}, this.tableParams, this.queryParams)
     ) {
       try {
-        const { items, total } = await userApi.query(params);
+        const { items, total } = await swiperApi.query(params);
         this.tableData = items;
         this.total = total;
       } catch (error) {
@@ -122,17 +116,17 @@ export default {
       }
     },
     async changeStatus(row) {
-      const title = `是否${row.userStatus === "ENABLE" ? "禁用" : "启用"}?`;
+      const title = `是否${row.enableStatus === "ENABLE" ? "禁用" : "启用"}?`;
       try {
         await this.$confirm(title, "提示", {
           confirmButtonText: "确认",
           cancelButtonText: "取消",
           type: "warning"
         });
-        if (row.userStatus === "ENABLE") {
-          await userApi.disable({userId: row.userId});
+        if (row.enableStatus === "ENABLE") {
+          await swiperApi.disable({swiperId: row.swiperId});
         } else {
-          await userApi.enable({userId: row.userId});
+          await swiperApi.enable({swiperId: row.swiperId});
         }
         this.getList();
       } catch (error) {
@@ -143,14 +137,14 @@ export default {
         });
       }
     },
-     async removeUser(id){
+     async removeSwiper(id){
       try {
         await this.$confirm('是否确定删除？', "提示", {
           confirmButtonText: "确认",
           cancelButtonText: "取消",
           type: "warning"
         });
-        await userApi.delete({userId: id})
+        await swiperApi.delete({swiperId: id})
         this.getList();
       } catch (error) {
         if (error === "cancel") return;

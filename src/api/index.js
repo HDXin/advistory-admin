@@ -15,3 +15,14 @@ export let userApi = new Api('admin/user', 'userId', {
     }
 }); //用户管理
 export let loginApi = (data) => Api.post('auth/admin/login', data) //用户管理
+
+export let swiperApi = new Api('admin/swiper', 'swiperId',{
+    enable: {
+        url: '{swiperId}/enable',
+        method: 'put'
+    },
+    disable:{
+        url: '{swiperId}/disable',
+        method: 'put'
+    }
+})

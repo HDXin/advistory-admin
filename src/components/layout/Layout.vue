@@ -16,6 +16,10 @@
             <i class="el-icon-location"></i>
             <span slot="title">平台用户</span>
           </el-menu-item>
+          <el-menu-item index="/carousel">
+            <i class="el-icon-location"></i>
+            <span slot="title">轮播图</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main class="layout-content">

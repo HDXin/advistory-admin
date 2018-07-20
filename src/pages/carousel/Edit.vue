@@ -2,7 +2,7 @@
     <page>
         <el-breadcrumb separator=">"
                        slot="header">
-            <el-breadcrumb-item to="/user">运营平台用户</el-breadcrumb-item>
+            <el-breadcrumb-item to="/carousel">轮播图</el-breadcrumb-item>
             <el-breadcrumb-item>{{$route.params.id ? '编辑': '新增'}}</el-breadcrumb-item>
         </el-breadcrumb>
         <edit-content>
@@ -10,52 +10,54 @@
                      :rules="rules"
                      ref="form"
                      label-width="150px">
-                <el-form-item label="用户名"
-                              prop="userName">
-                    <el-input placeholder="请输入用户名"
+                <el-form-item label="标题"
+                              prop="title">
+                    <el-input placeholder="请输入标题"
                               :disabled="isEdit"
-                              v-model="model.userName"></el-input>
+                              v-model="model.title"></el-input>
                 </el-form-item>
-                <el-form-item label="手机号码"
-                              prop="mobile">
-                    <el-input v-model.number="model.mobile"
+                <el-form-item label="描述"
+                              prop="description">
+                    <el-input v-model="model.description"
                               :disabled="isEdit"
-                              type="number"
-                              placeholder="请输入手机号"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱"
-                              prop="email">
-                    <el-input v-model="model.email"
-                              :disabled="isEdit"
-                              placeholder="请输入邮箱"></el-input>
-                </el-form-item>
-                <el-form-item label="电话"
-                              prop="tel">
-                    <el-input v-model.number="model.tel"
-                              :disabled="isEdit"
-                              placeholder="请输入联系电话"></el-input>
+                              placeholder="请输入描述"></el-input>
                 </el-form-item>
                 <el-form-item label="头像"
-                              prop="photo">
-                    <upload v-model="model.photo"
+                              prop="image">
+                    <upload v-model="model.image"
                             :limit="1"
                             :disabled="isEdit">
                         <i class="el-icon-plus"></i>
                     </upload>
                 </el-form-item>
-                <el-form-item label="性别"
+                <el-form-item label="跳转链接"
+                              prop="link">
+                    <el-input v-model="model.link"
+                              :disabled="isEdit"
+                              placeholder="请输入跳转链接"></el-input>
+                </el-form-item>
+                <el-form-item label="轮播类型"
                               required
-                              prop="gender">
-                    <el-radio-group v-model="model.gender"
+                              prop="type">
+                    <el-radio-group v-model="model.type"
                                     :disabled="isEdit">
-                        <el-radio :label="true">男</el-radio>
-                        <el-radio :label="false">女</el-radio>
+                        <el-radio label="AD">广告</el-radio>
+                        <!-- <el-radio label="false">女</el-radio> -->
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="打开方式"
+                              required
+                              prop="openType">
+                    <el-radio-group v-model="model.openType"
+                                    :disabled="isEdit">
+                        <el-radio label="NONE">不打开</el-radio>
+                        <!-- <el-radio label="false">女</el-radio> -->
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="是否启用"
                               required
-                              prop="userStatus">
-                    <el-radio-group v-model="model.userStatus"
+                              prop="enableStatus">
+                    <el-radio-group v-model="model.enableStatus"
                                     :disabled="isEdit">
                         <el-radio label="ENABLE">启用</el-radio>
                         <el-radio label="DISABLE">禁用</el-radio>
@@ -73,37 +75,35 @@
     </page>
 </template>
 <script>
-import { userApi } from "@/api";
+import { swiperApi } from "@/api";
 export default {
   data() {
     return {
       model: {
-        userName: "",
-        gender: true,
-        mobile: "",
-        tel: "",
-        email: "",
-        photo: [],
-        userStatus: "ENABLE"
+        title: "",
+        openType: 'NONE',
+        description: "",
+        link: "",
+        image: [],
+        enableStatus: "ENABLE",
+        type: 'AD'
       },
       rules: {
-        userName: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+        title: [
+          { required: true, message: "请输入标题", trigger: "blur" }
         ],
-        mobile: [
+        description: [
           {
             required: true,
-            message: "请输入手机号",
+            message: "请输入描述",
             trigger: "blur",
-            type: "number"
           }
         ],
-        tel: [{ required: true, message: "请输入电话", trigger: "blur" }],
-        email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
-        photo: [
+        link: [{ required: true, message: "请输入跳转链接", trigger: "blur" }],
+        image: [
           {
             required: true,
-            message: "请上传头像",
+            message: "请上传图片",
             trigger: "change",
             type: "array"
           }
@@ -121,9 +121,8 @@ export default {
   methods: {
       async getInfo(){
           try {
-              let res = await userApi.get({userId: this.$route.params.id})
-              res.photo = [{url:res.photo}];
-              res.mobile = parseInt(res.mobile)
+              let res = await swiperApi.get({swiperId: this.$route.params.id})
+              res.image = [{url:res.image}];
               this.model = res;
           } catch (error) {
               this.$message({
@@ -138,11 +137,10 @@ export default {
         let params = this.formatData();
         this.loading = true;
         if (this.$route.params.id) {
-          Object.assign(params, {userId: this.$route.params.id})
-          await userApi.update(params)
+          Object.assign(params, {swiperId: this.$route.params.id})
+          await swiperApi.update(params)
         } else {
-          await this.validName();
-          await userApi.create(params);
+          await swiperApi.create(params);
         }
           this.goBack();
       } catch (error) {
@@ -155,21 +153,9 @@ export default {
         this.loading = false
       }
     },
-    //检验用户名是否已存在
-    async validName() {
-      try {
-        const flag = await userApi.validUserName({
-          userName: this.model.userName
-        });
-        if (flag) return;
-        throw { message: "用户名已存在" };
-      } catch (error) {
-        throw error;
-      }
-    },
     formatData() {
       let params = Object.assign({}, this.model);
-      params.photo = params.photo[0].response || params.photo[0].url.matchUrl();
+      params.image = params.image[0].response || params.image[0].url.matchUrl();
       return params;
     }
   }
