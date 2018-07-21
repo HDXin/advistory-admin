@@ -16,6 +16,10 @@ export let userApi = new Api('admin/user', 'userId', {
     updatePass:{
         url: 'pass/update',
         method: 'put'
+    },
+    resetPass:{
+        url: '{userId}/pass/reset',
+        method: 'put'
     }
 }); //用户管理
 export let loginApi = (data) => Api.post('auth/admin/login', data) //用户管理
@@ -28,5 +32,11 @@ export let swiperApi = new Api('admin/swiper', 'swiperId',{
     disable:{
         url: '{swiperId}/disable',
         method: 'put'
+    }
+})
+export let articleApi = new Api('/admin/article', 'articleId',{
+    validCode:{
+        url: 'code/isValid',
+        method: 'get'
     }
 })

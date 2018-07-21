@@ -20,6 +20,10 @@
             <i class="el-icon-location"></i>
             <span slot="title">轮播图</span>
           </el-menu-item>
+          <el-menu-item index="/article">
+            <i class="el-icon-location"></i>
+            <span slot="title">文章管理</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main class="layout-content">

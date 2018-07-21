@@ -10,7 +10,10 @@ import "wangeditor/dist/css/wangEditor.less";
 import 'normalize.css'
 import './styles/index.less'
 import './util'
+import moment from 'moment';
 Vue.config.productionTip = false
+
+Vue.prototype.moment = moment;
 
 Vue.use(ElementUI);
 

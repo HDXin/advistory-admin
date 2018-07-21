@@ -58,6 +58,30 @@ export default new Router({
           },
           component: () => import('@/pages/carousel/Edit')
         },
+        {
+          path: '/article',
+          name: 'article',
+          meta:{
+            title: '轮播图'
+          },
+          component: () => import('@/pages/article/Article')
+        },
+        {
+          path: '/article/create',
+          name: 'article_create',
+          meta:{
+            title: '轮播图新增'
+          },
+          component: () => import('@/pages/article/Edit')
+        },
+        {
+          path: '/article/edit/:id',
+          name: 'article_edit',
+          meta:{
+            title: '轮播图编辑'
+          },
+          component: () => import('@/pages/article/Edit')
+        },
       ]
     },
     {
