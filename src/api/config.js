@@ -3,11 +3,11 @@ module.exports = {
     name: '测试',
     env: env,
     apiUrlPrefix: {
-        development: 'http://api.51alf.cn',
-        production: "http://api.51alf.cn",
+        development: 'http://advistory.51alf.cn/api',
+        production: "http://advistory.51alf.cn/api",
     },
     imageUrl: {
-        development: 'http://api.51alf.cn/image/',
-        production: "http://api.51alf.cn/image/",
+        development: 'http://advistory.51alf.cn/api/image/',
+        production: "http://advistory.51alf.cn/api/image/",
     }
 };
