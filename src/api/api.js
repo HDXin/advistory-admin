@@ -91,15 +91,19 @@ function send(url, data, otherOptions, method = 'get') {
     return new Promise((resolve, reject) => {
         const token = Cookies.get('_MCH_AT');
         console.log(token)
-        let config = {
-            headers:{
-                token
-            }
-        };
+        let config = {};
         if (method == 'get') {
-            config = Object.assign({}, { url: url, method: method, params: data }, otherOptions);
+            config = Object.assign({}, { url: url, method: method, params: data }, otherOptions, {
+                headers: {
+                    token
+                }
+            });
         } else {
-            config = Object.assign({}, { url: url, method: method, data: data }, otherOptions);
+            config = Object.assign({}, { url: url, method: method, data: data }, otherOptions, {
+                headers: {
+                    token
+                }
+            });
         }
         axios.request(config).then((res) => {
             // if (!res.data) res.data = { code: 200 };
@@ -107,10 +111,10 @@ function send(url, data, otherOptions, method = 'get') {
         }).catch(({ response }) => {
             let { data } = response;
             console.log(response);
-            if(response.status == '401'){
+            if (response.status == '401') {
                 global.$moduleMain.$message.error('请先登录');
                 window.loaction.href = '/portal';
-            }else {
+            } else {
                 reject(data);
             }
         })
