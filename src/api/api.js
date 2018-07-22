@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import $config from './config';
+import Cookies from 'js-cookie';
 let baseUrl = $config.apiUrlPrefix[$config.env.NODE_ENV]
-
 let axios = Axios.create({
     baseURL: baseUrl
 })
@@ -89,7 +89,13 @@ export default class Api {
 }
 function send(url, data, otherOptions, method = 'get') {
     return new Promise((resolve, reject) => {
-        let config = {};
+        const token = Cookies.get('_MCH_AT');
+        console.log(token)
+        let config = {
+            headers:{
+                token
+            }
+        };
         if (method == 'get') {
             config = Object.assign({}, { url: url, method: method, params: data }, otherOptions);
         } else {
