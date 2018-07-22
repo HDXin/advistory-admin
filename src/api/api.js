@@ -2,8 +2,13 @@ import Axios from 'axios';
 import $config from './config';
 import Cookies from 'js-cookie';
 let baseUrl = $config.apiUrlPrefix[$config.env.NODE_ENV]
+const token = Cookies.get('_MCH_AT');
 let axios = Axios.create({
-    baseURL: baseUrl
+    baseURL: baseUrl,
+    headers:{
+        token: token,
+        withCredentials: true
+    }
 })
 
 
@@ -89,21 +94,11 @@ export default class Api {
 }
 function send(url, data, otherOptions, method = 'get') {
     return new Promise((resolve, reject) => {
-        const token = Cookies.get('_MCH_AT');
-        console.log(token)
         let config = {};
         if (method == 'get') {
-            config = Object.assign({}, { url: url, method: method, params: data }, otherOptions, {
-                headers: {
-                    token
-                }
-            });
+            config = Object.assign({}, { url: url, method: method, params: data }, otherOptions);
         } else {
-            config = Object.assign({}, { url: url, method: method, data: data }, otherOptions, {
-                headers: {
-                    token
-                }
-            });
+            config = Object.assign({}, { url: url, method: method, data: data }, otherOptions);
         }
         axios.request(config).then((res) => {
             // if (!res.data) res.data = { code: 200 };
