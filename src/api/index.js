@@ -1,6 +1,6 @@
 import Api from './api';
 
-export let userApi = new Api('admin/user', 'userId', {
+export const userApi = new Api('admin/user', 'userId', {
     validUserName:{
         url: 'valid/username',
         method: 'get'
@@ -22,9 +22,9 @@ export let userApi = new Api('admin/user', 'userId', {
         method: 'put'
     }
 }); //用户管理
-export let loginApi = (data) => Api.post('auth/admin/login', data) //用户管理
+export const loginApi = (data) => Api.post('auth/admin/login', data) //用户管理
 
-export let swiperApi = new Api('admin/swiper', 'swiperId',{
+export const swiperApi = new Api('admin/swiper', 'swiperId',{
     enable: {
         url: '{swiperId}/enable',
         method: 'put'
@@ -34,9 +34,22 @@ export let swiperApi = new Api('admin/swiper', 'swiperId',{
         method: 'put'
     }
 })
-export let articleApi = new Api('/admin/article', 'articleId',{
+export const articleApi = new Api('/admin/article', 'articleId',{
     validCode:{
         url: 'code/isValid',
         method: 'get'
     }
 })
+
+export const feedbackApi = new Api('/admin/feedback', 'feedbackId');
+export const vipUserApi = new Api('/admin/appUser', 'userId',{
+    enable: {
+        url: '{userId}/enable',
+        method: 'put'
+    },
+    disable:{
+        url: '{userId}/disable',
+        method: 'put'
+    }
+});
+export const advistoryInfoApi = new Api('admin/advistoryInfo', 'advistoryId')

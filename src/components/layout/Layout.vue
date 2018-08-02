@@ -16,6 +16,10 @@
             <i class="el-icon-location"></i>
             <span slot="title">平台用户</span>
           </el-menu-item>
+          <el-menu-item index="/vip">
+            <i class="el-icon-location"></i>
+            <span slot="title">会员用户</span>
+          </el-menu-item>
           <el-menu-item index="/carousel">
             <i class="el-icon-location"></i>
             <span slot="title">轮播图</span>
@@ -24,6 +28,23 @@
             <i class="el-icon-location"></i>
             <span slot="title">文章管理</span>
           </el-menu-item>
+          <el-menu-item index="/advistory">
+            <i class="el-icon-location"></i>
+            <span slot="title">咨询管理</span>
+          </el-menu-item>
+          <el-menu-item index="/feedback">
+            <i class="el-icon-location"></i>
+            <span slot="title">意见反馈</span>
+          </el-menu-item>
+          <el-submenu index="/subjectInfo">
+            <template slot="title"> <i class="el-icon-location"></i> 行情管理</template>
+            <el-menu-item index="/subjectInfo">标的信息</el-menu-item>
+            <el-menu-item index="/timeShareInfo">分时数据信息</el-menu-item>
+            <el-menu-item index="/referenceCurveInfo">参考曲线数据信息</el-menu-item>
+            <el-menu-item index="/dailyInfo">每日数据信息</el-menu-item>
+            <el-menu-item index="/upDownsInfo">涨跌预判信息</el-menu-item>
+            <el-menu-item index="/targetInfo">标的品种信息</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-aside>
       <el-main class="layout-content">

@@ -1,23 +1,24 @@
 <template>
   <div class="header">
-    <h3 class="logo">Advistory Admin</h3>
-      <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link">
-          <images :src="model.photo" avatar />
-          {{model.userName}}
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>
-          <el-dropdown-item command="resetPassword">重置密码</el-dropdown-item>
-          <el-dropdown-item command="exit">退出</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <update-password :visible.sync="dialogVisible"/>
+    <h3 class="logo">PSJ金融管理系统</h3>
+    <div style="color:#fff;flex: 1">{{time}}</div>
+    <el-dropdown @command="handleCommand">
+      <span class="el-dropdown-link">
+        <images :src="model.photo"
+                avatar /> {{model.userName}}
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>
+        <el-dropdown-item command="resetPassword">重置密码</el-dropdown-item>
+        <el-dropdown-item command="exit">退出</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+    <update-password :visible.sync="dialogVisible" />
   </div>
 </template>
 <script>
-import UpdatePassword from '../UpdatePassword'
+import UpdatePassword from "../UpdatePassword";
 import { userApi } from "@/api";
 export default {
   components: {
@@ -25,38 +26,46 @@ export default {
   },
   data() {
     return {
-      model: JSON.parse(localStorage.getItem('user')),
+      model: JSON.parse(localStorage.getItem("user")),
       dialogVisible: false,
+      time: this.moment().format('dddd YYYY年MM月DD日 a hh:mm:ss')
     };
   },
-  methods:{
-     async handleCommand(key){
-      if(key === 'exit') return this.exit();
-      if(key === 'updatePassword') return this.dialogVisible = true;
-      if(key === 'resetPassword') {
+  mounted(){
+    setInterval(() => this.time = this.moment().format('dddd YYYY年MM月DD日 a hh:mm:ss'), 1000)
+  },
+  methods: {
+    async handleCommand(key) {
+      if (key === "exit") return this.exit();
+      if (key === "updatePassword") return (this.dialogVisible = true);
+      if (key === "resetPassword") {
         try {
-          await this.$confirm('是否确认重置密码？重置后密码将变为初始密码', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          })
-          await userApi.resetPass({userId: this.model.userId})
+          await this.$confirm(
+            "是否确认重置密码？重置后密码将变为初始密码",
+            "提示",
+            {
+              confirmButtonText: "确定",
+              cancelButtonText: "取消",
+              type: "warning"
+            }
+          );
+          await userApi.resetPass({ userId: this.model.userId });
           this.$message({
-            message: '重置成功',
-            type: 'success'
+            message: "重置成功",
+            type: "success"
           });
         } catch (error) {
-          if(error === 'cancel') return;
+          if (error === "cancel") return;
           this.$message({
             message: error.message,
-            type: 'error'
+            type: "error"
           });
         }
-      };
+      }
     },
-    exit(){
-      localStorage.removeItem('user');
-      this.$router.replace('/login');
+    exit() {
+      localStorage.removeItem("user");
+      this.$router.replace("/login");
     }
   }
 };
@@ -67,7 +76,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  .el-dropdown{
+  .el-dropdown {
     margin-right: 35px;
     color: white;
     font-size: 20px;
