@@ -144,7 +144,7 @@ export default new Router({
           meta:{
             title: '会员用户'
           },
-          component: () => import('@/pages/vip/vipUser')
+          component: () => import('@/pages/vip/VipUser')
         },
         {
           path: '/vip/edit/:id',
