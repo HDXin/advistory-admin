@@ -53,3 +53,4 @@ export const vipUserApi = new Api('/admin/appUser', 'userId',{
     }
 });
 export const advistoryInfoApi = new Api('admin/advistoryInfo', 'advistoryId')
+export const memberLevelApi = new Api('admin/memberLevel', 'memberLevelId')

@@ -32,6 +32,10 @@
             <i class="el-icon-location"></i>
             <span slot="title">咨询管理</span>
           </el-menu-item>
+          <el-menu-item index="/system">
+            <i class="el-icon-location"></i>
+            <span slot="title">系统设置</span>
+          </el-menu-item>
           <el-menu-item index="/feedback">
             <i class="el-icon-location"></i>
             <span slot="title">意见反馈</span>

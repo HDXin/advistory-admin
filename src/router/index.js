@@ -178,6 +178,30 @@ export default new Router({
           },
           component: () => import('@/pages/advistory/Edit')
         },
+        {
+          path: '/system',
+          name: 'system',
+          meta:{
+            title: '系统设置'
+          },
+          component: () => import('@/pages/system/System')
+        },
+        {
+          path: '/system/create',
+          name: 'system',
+          meta:{
+            title: '系统设置新增'
+          },
+          component: () => import('@/pages/system/Edit')
+        },
+        {
+          path: '/system/edit/:id',
+          name: 'system_edit',
+          meta:{
+            title: '系统设置编辑'
+          },
+          component: () => import('@/pages/system/Edit')
+        },
       ]
     },
     {

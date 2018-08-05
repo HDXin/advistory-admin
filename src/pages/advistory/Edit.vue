@@ -77,6 +77,12 @@
         <el-form-item label="是否置顶">
           <el-checkbox v-model="model.stickStatus" :disabled="isEdit"></el-checkbox>
         </el-form-item>
+        <el-form-item label="是否展示广告">
+          <el-checkbox v-model="model.adStatus" :disabled="isEdit"></el-checkbox>
+        </el-form-item>
+        <el-form-item label="底部跳转链接">
+          <el-input v-model="model.link"></el-input>
+        </el-form-item>
         <el-form-item>
           <el-button @click="goBack">返回</el-button>
           <el-button type="primary"
@@ -117,7 +123,9 @@ export default {
             link: "",
             displayOrder: 0
           }
-        ]
+        ],
+        adStatus: false,
+        link: ''
       },
       isEdit: !!this.$route.params.id,
       loading: false,
