@@ -94,7 +94,7 @@ export default new Router({
           path: '/dailyInfo',
           name: 'daily_info',
           meta:{
-            title: '每日数据信息'
+            title: '日大数据'
           },
           component: () => import('@/pages/quotes/DailyInfo')
         },

@@ -1,12 +1,12 @@
 <template>
-  <el-dialog title="分时数据信息"
+  <el-dialog title="当日数据信息"
              :visible.sync="dialogVisible">
     <el-table :data="models">
       <el-table-column label="时间"></el-table-column>
       <el-table-column label="标的品种"></el-table-column>
-      <el-table-column label="价格"></el-table-column>
+      <el-table-column label="价格max"></el-table-column>
+      <el-table-column label="价格min"></el-table-column>
       <el-table-column label="交易量"></el-table-column>
-      <el-table-column label="涨跌预判值"></el-table-column>
     </el-table>
     <div class="text-right">
       <el-button type="primary"

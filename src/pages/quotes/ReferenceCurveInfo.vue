@@ -55,47 +55,47 @@ export default {
       itemList: [],
       columns: [
         {
-          label: "标的代码",
+          label: "日期",
           prop: "articleId"
         },
         {
-          label: "标的名称",
+          label: "曲线名称",
           prop: "title"
         },
         {
-          label: "标的分类符",
+          label: "行情值",
           prop: "createTime",
           formatter: row => this.moment().format("YYYY-MM-DD")
         },
         {
-          label: "显示广告",
+          label: "参考量",
           prop: "createTime",
           formatter: row => this.moment().format("YYYY-MM-DD")
         },
-        {
-          label: "操作",
-          render: (h, { row }) => {
-            return (
-              <div>
-                <link-button
-                  to={`/article/edit/${row.articleId}`}
-                  size="small"
-                  type="text"
-                >
-                  编辑
-                </link-button>
-                <el-button
-                  type="text"
-                  size="small"
-                  class="text-danger"
-                  onClick={() => this.remove(row.articleId)}
-                >
-                  删除
-                </el-button>
-              </div>
-            );
-          }
-        }
+        // {
+        //   label: "操作",
+        //   render: (h, { row }) => {
+        //     return (
+        //       <div>
+        //         <link-button
+        //           to={`/article/edit/${row.articleId}`}
+        //           size="small"
+        //           type="text"
+        //         >
+        //           编辑
+        //         </link-button>
+        //         <el-button
+        //           type="text"
+        //           size="small"
+        //           class="text-danger"
+        //           onClick={() => this.remove(row.articleId)}
+        //         >
+        //           删除
+        //         </el-button>
+        //       </div>
+        //     );
+        //   }
+        // }
       ]
     };
   },

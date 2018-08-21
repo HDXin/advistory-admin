@@ -42,12 +42,12 @@
           </el-menu-item>
           <el-submenu index="/subjectInfo">
             <template slot="title"> <i class="el-icon-location"></i> 行情管理</template>
-            <el-menu-item index="/subjectInfo">标的信息</el-menu-item>
             <el-menu-item index="/timeShareInfo">分时数据信息</el-menu-item>
-            <el-menu-item index="/referenceCurveInfo">参考曲线数据信息</el-menu-item>
-            <el-menu-item index="/dailyInfo">每日数据信息</el-menu-item>
-            <el-menu-item index="/upDownsInfo">涨跌预判信息</el-menu-item>
-            <el-menu-item index="/targetInfo">标的品种信息</el-menu-item>
+            <!-- <el-menu-item index="/subjectInfo">日k数据</el-menu-item> -->
+            <el-menu-item index="/referenceCurveInfo">参考曲线</el-menu-item>
+            <el-menu-item index="/dailyInfo">日大数据</el-menu-item>
+            <!-- <el-menu-item index="/upDownsInfo">涨跌预判信息</el-menu-item>
+            <el-menu-item index="/targetInfo">标的品种信息</el-menu-item> -->
           </el-submenu>
         </el-menu>
       </el-aside>
