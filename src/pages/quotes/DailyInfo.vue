@@ -9,7 +9,7 @@
             </el-col>
             <el-col :span="4"
                     class="text-right">
-                <el-button  size="small"
+                <el-button  size="small" @click="dialogVisible = true"
                              type="primary">新增</el-button>
             </el-col>
         </el-row>
@@ -31,15 +31,19 @@
                  :limit="tableParams.limit"
                  :currentPage="tableParams.page"
                  :data="tableData"></k-table>
+                 <daily-info-edit :visible.sync="dialogVisible"/>
     </page>
 </template>
 <script>
 import { mixin } from "@/mixins/search";
 import { articleApi } from "@/api";
+import DailyInfoEdit from "@/components/quotes/DailyInfoEdit";
 export default {
   mixins: [mixin],
+  components:{DailyInfoEdit},
   data() {
     return {
+      dialogVisible: true,
       queryParams: {
         articleName: "",
         mobile: ""
@@ -49,47 +53,52 @@ export default {
       itemList: [],
       columns: [
         {
-          label: "标的代码",
+          label: "时间",
           prop: "articleId"
         },
         {
-          label: "标的名称",
+          label: "标的品种",
           prop: "title"
         },
         {
-          label: "标的分类符",
+          label: "价格max",
           prop: "createTime",
           formatter: row => this.moment().format("YYYY-MM-DD")
         },
         {
-          label: "显示广告",
+          label: "价格min",
           prop: "createTime",
           formatter: row => this.moment().format("YYYY-MM-DD")
         },
         {
-          label: "操作",
-          render: (h, { row }) => {
-            return (
-              <div>
-                <link-button
-                  to={`/article/edit/${row.articleId}`}
-                  size="small"
-                  type="text"
-                >
-                  编辑
-                </link-button>
-                <el-button
-                  type="text"
-                  size="small"
-                  class="text-danger"
-                  onClick={() => this.remove(row.articleId)}
-                >
-                  删除
-                </el-button>
-              </div>
-            );
-          }
-        }
+          label: "交易量",
+          prop: "createTime",
+          formatter: row => this.moment().format("YYYY-MM-DD")
+        },
+        // {
+        //   label: "操作",
+        //   render: (h, { row }) => {
+        //     return (
+        //       <div>
+        //         <link-button
+        //           to={`/article/edit/${row.articleId}`}
+        //           size="small"
+        //           type="text"
+        //         >
+        //           编辑
+        //         </link-button>
+        //         <el-button
+        //           type="text"
+        //           size="small"
+        //           class="text-danger"
+        //           onClick={() => this.remove(row.articleId)}
+        //         >
+        //           删除
+        //         </el-button>
+        //       </div>
+        //     );
+        //   }
+        // }
       ]
     };
   },

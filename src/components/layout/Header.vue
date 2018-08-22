@@ -10,7 +10,7 @@
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="updatePassword">修改密码</el-dropdown-item>
-        <el-dropdown-item command="resetPassword">重置密码</el-dropdown-item>
+        <!-- <el-dropdown-item command="resetPassword">重置密码</el-dropdown-item> -->
         <el-dropdown-item command="exit">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>

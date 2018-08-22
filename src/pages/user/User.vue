@@ -86,6 +86,14 @@ export default {
                 <el-button
                   type="text"
                   size="small"
+                  class='text-warning'
+                  onClick={() => this.resetPassword(row.userId)}
+                >
+                  重置密码
+                </el-button>
+                <el-button
+                  type="text"
+                  size="small"
                   class={{'text-danger': row.userStatus === "ENABLE"}}
                   onClick={() => this.changeStatus(row)}
                 >
@@ -99,6 +107,7 @@ export default {
                 >
                   删除
                 </el-button>
+                
               </div>
             );
           }
@@ -159,6 +168,30 @@ export default {
           type: "error"
         });
       }
+    },
+    async resetPassword(id){
+      try {
+          await this.$confirm(
+            "是否确认重置密码？重置后密码将变为初始密码",
+            "提示",
+            {
+              confirmButtonText: "确定",
+              cancelButtonText: "取消",
+              type: "warning"
+            }
+          );
+          await userApi.resetPass({ userId: id });
+          this.$message({
+            message: "重置成功",
+            type: "success"
+          });
+        } catch (error) {
+          if (error === "cancel") return;
+          this.$message({
+            message: error.message,
+            type: "error"
+          });
+        }
     }
   }
 };
